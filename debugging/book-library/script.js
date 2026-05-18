@@ -29,18 +29,18 @@ const check = document.getElementById("check");
 function submit() {
   const trimmedTitle = title.value.trim()
   const trimmedAuthor = author.value.trim()
-  const pagesInt = parseInt(pages.value, 10)
-  if (trimmesTitle === "") {
-    alert("please enter a title.")
+  const pagesInt = parseInt(pages.value, 10);
+  if (trimmedTitle === "") {
+    alert("Please enter a title.");
     return false;
   }
   if (trimmedAuthor === ""){
-    alert("please enter an author.")
+    alert("Please enter an author.");
     return false;
   }
   if (isNaN(pagesInt) || pagesInt <= 0){
-    alert("please enter a valid number of pages")
-  return false;
+    alert("Please enter a valid number of pages");
+    return false;
   }
    
   let book = new Book(trimmedTitle, trimmedAuthor, pagesInt, check.checked);
