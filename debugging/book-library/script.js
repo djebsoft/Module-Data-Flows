@@ -27,22 +27,22 @@ const check = document.getElementById("check");
 //check the right input from forms and if its ok -> add the new book (object in array)
 //via Book function and start render function
 function submit() {
-  const trimmedTitle = title.value.trim()
-  const trimmedAuthor = author.value.trim()
+  const trimmedTitle = title.value.trim();
+  const trimmedAuthor = author.value.trim();
   const pagesInt = parseInt(pages.value, 10);
   if (trimmedTitle === "") {
     alert("Please enter a title.");
     return false;
   }
-  if (trimmedAuthor === ""){
+  if (trimmedAuthor === "") {
     alert("Please enter an author.");
     return false;
   }
-  if (isNaN(pagesInt) || pagesInt <= 0){
+  if (isNaN(pagesInt) || pagesInt <= 0) {
     alert("Please enter a valid number of pages");
     return false;
   }
-   
+
   let book = new Book(trimmedTitle, trimmedAuthor, pagesInt, check.checked);
   myLibrary.push(book);
   render();
@@ -61,7 +61,7 @@ function render() {
   //insert updated row and cells
   let length = myLibrary.length;
   for (let i = 0; i < length; i++) {
-    let row = table.insertRow(1);
+    let row = table.tBodies[0].insertRow(-1);
     let titleCell = row.insertCell(0);
     let authorCell = row.insertCell(1);
     let pagesCell = row.insertCell(2);
@@ -89,8 +89,8 @@ function render() {
     delBut.className = "btn btn-warning";
     delBut.innerHTML = "Delete";
     delBut.addEventListener("click", function () {
-      myLibrary.splice(i, 1);
       alert(`You've deleted title: ${myLibrary[i].title}`);
+      myLibrary.splice(i, 1);
       render();
     });
   }
