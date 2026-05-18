@@ -90,8 +90,8 @@ table.tBodies[0].innerHTML = "";
     delBut.className = "btn btn-warning";
     delBut.innerHTML = "Delete";
     delBut.addEventListener("click", function () {
-      alert(`You've deleted title: ${myLibrary[i].title}`);
       myLibrary.splice(i, 1);
+      alert(`You've deleted title: ${myLibrary[i].title}`);
       render();
     });
   }
