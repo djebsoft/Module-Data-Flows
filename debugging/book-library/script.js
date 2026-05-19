@@ -3,6 +3,7 @@ let myLibrary = [];
 window.addEventListener("load", function (e) {
   populateStorage();
   render();
+  document.getElementById("submit").addEventListener("click", submit)
 });
 
 function populateStorage() {
@@ -19,17 +20,17 @@ function populateStorage() {
   }
 }
 
-const title = document.getElementById("title");
-const author = document.getElementById("author");
-const pages = document.getElementById("pages");
-const check = document.getElementById("check");
+const titleInput = document.getElementById("title");
+const authorInput = document.getElementById("author");
+const pagesInput = document.getElementById("pages");
+const checkInput = document.getElementById("check");
 
 //check the right input from forms and if its ok -> add the new book (object in array)
 //via Book function and start render function
 function submit() {
-  const trimmedTitle = title.value.trim();
-  const trimmedAuthor = author.value.trim();
-  const pagesInt = parseInt(pages.value, 10);
+  const trimmedTitle = titleInput.value.trim();
+  const trimmedAuthor = authorInput.value.trim();
+  const pagesInt = parseInt(pagesInput.value, 10);
   if (trimmedTitle === "") {
     alert("Please enter a title.");
     return false;
@@ -43,7 +44,12 @@ function submit() {
     return false;
   }
 
-  let book = new Book(trimmedTitle, trimmedAuthor, pagesInt, check.checked);
+  let book = new Book(
+    trimmedTitle,
+    trimmedAuthor,
+    pagesInt,
+    checkInput.checked
+  );
   myLibrary.push(book);
   render();
 }
@@ -57,11 +63,12 @@ function Book(title, author, pages, check) {
 
 function render() {
   let table = document.getElementById("display");
-  table.tBodies[0].innerHTML = "";
+  let tbody = table.tBodies[0];
+  tbody.innerHTML = "";
   //insert updated row and cells
   let length = myLibrary.length;
   for (let i = 0; i < length; i++) {
-    let row = table.tBodies[0].insertRow(-1);
+    let row = tbody.insertRow(-1);
     let titleCell = row.insertCell(0);
     let authorCell = row.insertCell(1);
     let pagesCell = row.insertCell(2);
